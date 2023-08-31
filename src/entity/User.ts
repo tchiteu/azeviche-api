@@ -1,25 +1,64 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import { Shedule } from './Shedule'
+import {
+  Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn,
+} from 'typeorm';
+import {
+  Length, IsEmail, IsStrongPassword, validate,
+} from 'class-validator';
+import { Shedule } from './Shedule';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number
+    id: number;
 
   @Column()
-  name: string
+  @Length(2, 80)
+    name: string;
 
   @Column()
-  email: string
+  @IsEmail()
+    email: string;
+
+  @Column()
+  @IsStrongPassword()
+    password: string;
+
+  @Column()
+  @Length(5)
+    language: string;
 
   @Column()
   @CreateDateColumn()
-  created_at: Date;
+    created_at: Date;
 
   @Column()
   @UpdateDateColumn()
-  updated_at: Date;
+    updated_at: Date;
 
   @OneToMany(() => Shedule, (shedule) => shedule.user)
-  shedules: Shedule[]
+    shedules: Shedule[];
+
+  constructor(name: string, email: string, password: string, language: string) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.language = language;
+  }
+
+  public async validateProperties() {
+    const validateErrors = await validate(this);
+    const errors = validateErrors.map((error) => {
+      const { constraints, property } = error;
+
+      const keys = Object.keys(constraints);
+      const message = constraints[keys[0]];
+
+      return {
+        property,
+        message,
+      };
+    });
+
+    return errors;
+  }
 }
