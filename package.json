@@ -25,8 +25,8 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts",
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon src/app.ts",
     "typeorm": "typeorm-ts-node-commonjs"
   }
 }
