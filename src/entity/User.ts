@@ -2,7 +2,7 @@ import {
   Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn,
 } from 'typeorm';
 import {
-  Length, IsEmail, IsStrongPassword, validate,
+  Length, IsEmail, IsStrongPassword, IsBoolean, validate,
 } from 'class-validator';
 import { Shedule } from './Shedule';
 
@@ -18,6 +18,10 @@ export class User {
   @Column()
   @IsEmail()
     email: string;
+
+  @Column()
+  @IsBoolean()
+    manager: boolean;
 
   @Column()
   @IsStrongPassword()
@@ -38,10 +42,11 @@ export class User {
   @OneToMany(() => Shedule, (shedule) => shedule.user)
     shedules: Shedule[];
 
-  constructor(name: string, email: string, password: string, language: string) {
+  constructor(name: string, email: string, password: string, manager: boolean, language: string) {
     this.name = name;
     this.email = email;
     this.password = password;
+    this.manager = manager;
     this.language = language;
   }
 
