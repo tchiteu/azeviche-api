@@ -6,7 +6,7 @@
 
 <div align="center">
 
-  [![github-stars-image](https://img.shields.io/github/stars/tchiteu/azeviche-api.svg)](https://github.com/h5bp/html5-boilerplate)
+  [![github-stars-image](https://img.shields.io/github/stars/tchiteu/azeviche-api.svg)](https://github.com/tchiteu/azeviche-api)
   [![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/tchiteu/azeviche-api/edit/master/LINCESE.txt)
 </div>
 
