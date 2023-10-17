@@ -4,7 +4,6 @@ import {
 import {
   Length, IsEmail, IsStrongPassword, IsBoolean, validate,
 } from 'class-validator';
-import { Shedule } from './Shedule';
 
 @Entity()
 export class User {
@@ -38,9 +37,6 @@ export class User {
   @Column()
   @UpdateDateColumn()
     updated_at: Date;
-
-  @OneToMany(() => Shedule, (shedule) => shedule.user)
-    shedules: Shedule[];
 
   constructor(name: string, email: string, password: string, manager: boolean, language: string) {
     this.name = name;
