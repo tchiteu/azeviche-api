@@ -7,7 +7,7 @@
 <div align="center">
 
   [![github-stars-image](https://img.shields.io/github/stars/tchiteu/azeviche-api.svg)](https://github.com/tchiteu/azeviche-api)
-  [![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/tchiteu/azeviche-api/edit/master/LINCESE.txt)
+  [![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/tchiteu/azeviche-api/blob/master/license.txt)
 </div>
 
 <div align="center">
