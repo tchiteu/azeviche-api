@@ -37,3 +37,13 @@ export const create = async (req: Request, res: Response) => {
 
   return createdUser;
 };
+
+export const list = async (req: Request, res: Response) => {
+  const users = await database.find(User, {
+    select: ['id', 'name', 'email', 'language', 'manager', 'created_at', 'updated_at'],
+  });
+
+  if (!users.length) res.status(204);
+
+  res.json({ data: users });
+};
