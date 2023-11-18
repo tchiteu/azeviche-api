@@ -5,10 +5,10 @@ import { hashPassword } from '../services/auth';
 
 export const create = async (req: Request, res: Response) => {
   const {
-    name, email, password, manager, language,
+    name, email, password, country,
   } = req.body;
 
-  const user = new User(name, email, password, manager, language);
+  const user = new User(name, email, password, country);
 
   // validate body fields/properties
   const errors = await user.validateProperties();
@@ -40,7 +40,7 @@ export const create = async (req: Request, res: Response) => {
 
 export const list = async (req: Request, res: Response) => {
   const users = await database.find(User, {
-    select: ['id', 'name', 'email', 'language', 'manager', 'created_at', 'updated_at'],
+    select: ['id', 'name', 'email', 'country', 'created_at', 'updated_at'],
   });
 
   if (!users.length) res.status(204);
