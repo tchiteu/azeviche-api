@@ -33,9 +33,11 @@ export const create = async (req: Request, res: Response) => {
   user.password = hash;
 
   // insert user into database
-  const createdUser = await database.save(User, user);
+  await database.save(User, user);
 
-  return createdUser;
+  return res.status(204).json({
+    message: 'user created successfully',
+  });
 };
 
 export const list = async (req: Request, res: Response) => {
