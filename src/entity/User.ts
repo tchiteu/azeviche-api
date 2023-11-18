@@ -18,9 +18,9 @@ export class User {
   @IsEmail()
     email: string;
 
-  @Column()
+  @Column('boolean', { default: false })
   @IsBoolean()
-    manager: boolean;
+    manager: boolean = false;
 
   @Column()
   @IsStrongPassword()
@@ -42,8 +42,8 @@ export class User {
     this.name = name;
     this.email = email;
     this.password = password;
-    this.manager = manager;
-    this.language = language;
+    this.manager = false;
+    this.country = country;
   }
 
   public async validateProperties() {
