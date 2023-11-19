@@ -18,17 +18,17 @@ export class User {
   @IsEmail()
     email: string;
 
-  @Column()
+  @Column('boolean', { default: false })
   @IsBoolean()
-    manager: boolean;
+    manager: boolean = false;
 
   @Column()
   @IsStrongPassword()
     password: string;
 
   @Column()
-  @Length(5)
-    language: string;
+  @Length(4, 90)
+    country: string;
 
   @Column()
   @CreateDateColumn()
@@ -38,12 +38,12 @@ export class User {
   @UpdateDateColumn()
     updated_at: Date;
 
-  constructor(name: string, email: string, password: string, manager: boolean, language: string) {
+  constructor(name: string, email: string, password: string, country: string) {
     this.name = name;
     this.email = email;
     this.password = password;
-    this.manager = manager;
-    this.language = language;
+    this.manager = false;
+    this.country = country;
   }
 
   public async validateProperties() {
