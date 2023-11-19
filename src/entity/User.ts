@@ -30,6 +30,9 @@ export class User {
   @Length(4, 90)
     country: string;
 
+  @Column({ nullable: true })
+    refresh_token: string;
+
   @Column()
   @CreateDateColumn()
     created_at: Date;
