@@ -9,9 +9,14 @@ export const signIn = async (req: Request, res: Response) => {
   const user = await database.findOneBy(User, { email });
 
   if (user && await comparePassword(password, user.password)) {
-    const token = createJWT(user);
+    const token = createJWT(user, '5s');
+    const refreshToken = createJWT(user, '20s');
 
-    res.status(200).json({ token });
+    user.refresh_token = refreshToken;
+
+    await database.save(User, user);
+
+    return res.status(200).json({ token, refreshToken });
   }
 
   res.status(401).json({
