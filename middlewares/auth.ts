@@ -3,9 +3,9 @@ import { verify } from 'jsonwebtoken';
 
 export const ensureAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization;
+    const { authorization } = req.headers;
 
-    verify(token, process.env.JWT_SECRET);
+    verify(authorization, process.env.JWT_SECRET);
 
     return next();
   } catch (error) {
