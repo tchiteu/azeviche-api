@@ -1,13 +1,13 @@
-// BaseEntity.ts
 import { validate } from 'class-validator';
 import {
-  BaseEntity as TypeORMBaseEntity,
   CreateDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  Entity,
 } from 'typeorm';
 
-export abstract class BaseEntity extends TypeORMBaseEntity {
+@Entity()
+export class BaseEntity {
   @PrimaryGeneratedColumn()
     id: number;
 
