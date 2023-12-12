@@ -5,10 +5,10 @@ import { hashPassword } from '../services/auth';
 
 export const create = async (req: Request, res: Response) => {
   const {
-    name, email, password, manager, language,
+    name, email, password, country,
   } = req.body;
 
-  const user = new User(name, email, password, manager, language);
+  const user = new User(name, email, password, country);
 
   // validate body fields/properties
   const errors = await user.validateProperties();
@@ -33,7 +33,19 @@ export const create = async (req: Request, res: Response) => {
   user.password = hash;
 
   // insert user into database
-  const createdUser = await database.save(User, user);
+  await database.save(User, user);
 
-  return createdUser;
+  return res.status(204).json({
+    message: 'user created successfully',
+  });
+};
+
+export const list = async (req: Request, res: Response) => {
+  const users = await database.find(User, {
+    select: ['id', 'name', 'email', 'country', 'created_at', 'updated_at'],
+  });
+
+  if (!users.length) res.status(204);
+
+  res.json({ data: users });
 };
