@@ -1,0 +1,14 @@
+services:
+  db:
+    container_name: azeviche-db
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: azeviche
+    restart: always
+
+    # shared memory limit when using docker-compose
+    shm_size: 128mb
