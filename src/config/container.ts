@@ -6,6 +6,8 @@ import { UserService } from '../services/user.service';
 import { UserController } from '../controllers/user.controller';
 import { AuthService } from '../services/auth.service';
 import { AuthController } from '../controllers/auth.controller';
+import { ProjectService } from '../services/project.service';
+import { ProjectController } from '../controllers/project.controller';
 
 const prisma = new PrismaClient();
 
@@ -17,6 +19,9 @@ container.registerSingleton(TokenService);
 
 container.registerSingleton(AuthService);
 container.registerSingleton(AuthController);
+
+container.registerSingleton(ProjectService);
+container.registerSingleton(ProjectController);
 
 container.registerSingleton(UserService);
 container.registerSingleton(UserController);
