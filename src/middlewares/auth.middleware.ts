@@ -10,15 +10,15 @@ export const ensureAuthenticated = (req: Request, res: Response, next: NextFunct
     if (authorization) {
       const TokenPayload = tokenService.validateAccessToken(authorization);
       res.locals.user = TokenPayload;
-      next();
+      return next();
     }
-  } catch (error) {
-    console.error(error)
 
-    res.status(401).json({
+    return res.status(401).json({
+      message: 'Você deve estar autenticado para realizar essa requisição'
+    });
+  } catch (error) {
+    return res.status(401).json({
       message: 'Você deve estar autenticado para realizar essa requisição'
     });
   }
-
-  next();
 };
