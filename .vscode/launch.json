@@ -1,0 +1,13 @@
+{
+  "name": "tsx",
+  "type": "node",
+  "request": "launch",
+  "program": "${file}",
+  "runtimeExecutable": "tsx",
+  "console": "integratedTerminal",
+  "internalConsoleOptions": "neverOpen",
+  "skipFiles": [
+    "<node_internals>/**",
+    "${workspaceFolder}/node_modules/**",
+  ],
+}
