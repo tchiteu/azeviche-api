@@ -30,7 +30,6 @@ export class TokenService {
     try {
       const payload = jwt.verify(token, this.accessSecret) as TokenPayload;
 
-      console.log('Payload:', payload);
       return payload;
     } catch (error) {
       throw new AppError('Token inválido ou expirado.', 401);
