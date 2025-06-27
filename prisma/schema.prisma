@@ -60,8 +60,9 @@ model Project {
 model Task {
   id         String   @id @default(cuid())
   name       String
+  description String?
   hours      Int
-  hourValue  Float
+  hourValue  Float?
 
   projectId  String
   project    Project  @relation(fields: [projectId], references: [id])
