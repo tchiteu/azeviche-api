@@ -9,9 +9,9 @@ export class UserService {
   constructor(@inject('PrismaClient') private prisma: PrismaClient) {}
 
   async createUser(data: CreateUserDTO): Promise<User> {
-    const validatedData = userSchema.parse(data);
+    const validatedData = userSchema.strict().parse(data);
 
-    const alreadyRegistered = this.prisma.user.findUnique({
+    const alreadyRegistered = await this.prisma.user.findUnique({
       where: { email: data.email }
     });
 
