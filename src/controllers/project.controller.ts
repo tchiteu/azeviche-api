@@ -22,9 +22,7 @@ export class ProjectController {
         userId: res.locals.user.data.userId,
       });
 
-      console.log('tamo kk')
-      res.status(200).send()
-      // res.status(200).json(project);
+      res.status(200).json(project).send();
     } catch (error) {
       next(error);
     }
