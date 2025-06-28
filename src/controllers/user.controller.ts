@@ -18,11 +18,12 @@ export class UserController {
 
   async myProfile(req: Request, res: Response, next: NextFunction) {
     try {
-      const userId = res.locals.id;
+      const userId = res.locals.user.data.userId;
       const user = await this.userService.getUserById(userId);
       
       if (!user) {
-        return res.status(404).json({ message: 'Usuário não encontrado' }).send();
+        res.status(404).json({ message: 'Usuário não encontrado' }).send();
+        return;
       }
 
       res.status(200).json({ user }).send();
