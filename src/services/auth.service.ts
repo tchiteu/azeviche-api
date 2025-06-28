@@ -29,7 +29,13 @@ export class AuthService {
       throw new AppError('Usuário não encontrado', 404);
     }
 
-    const expiresAt = DateTime.now().plus({ minutes: 15 }).toJSDate();
+    const expiresAt = DateTime.now().plus({ minutes: 10 }).toJSDate();
+    
+    await this.prisma.authCode.deleteMany({
+      where: {
+        userId: user.id,
+      }
+    });
 
     await this.prisma.authCode.create({
       data: {
