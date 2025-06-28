@@ -1,6 +1,5 @@
 import { PrismaClient, User } from '@prisma/client';
 import { injectable, inject } from 'tsyringe';
-import { ApiResult } from '../types/result.type';
 import { CreateUserDTO, userSchema } from '../validations/user.validation';
 import { AppError } from '../errors/AppError';
 
