@@ -1,7 +1,6 @@
 import { PrismaClient, User } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { DateTime } from 'luxon';
-import { ApiResult } from '../types/result.type';
 import { TokenService } from './token.service';
 import { AppError } from '../errors/AppError';
 
@@ -21,7 +20,7 @@ export class AuthService {
     @inject(TokenService) private tokenService: TokenService
   ) {}
 
-  async generateSignInCode(email: string): Promise<ApiResult<SignInResponse>> {
+  async generateSignInCode(email: string): Promise<SignInResponse> {
     const code = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
     const user = await this.prisma.user.findUnique({ where: { email } });
 
@@ -30,30 +29,12 @@ export class AuthService {
     }
 
     const expiresAt = DateTime.now().plus({ minutes: 10 }).toJSDate();
-    
-    await this.prisma.authCode.deleteMany({
-      where: {
-        userId: user.id,
-      }
+    await this.prisma.authCode.deleteMany({ where: { userId: user.id } });
+    await this.prisma.authCode.create({
+      data: { code, email, userId: user.id, expiresAt }
     });
 
-    await this.prisma.authCode.create({
-      data: {
-        code,
-        email,
-        userId: user.id,
-        expiresAt
-      }
-    })
-
-    return {
-      success: true,
-      message: 'Código gerado com sucesso.',
-      data: {
-        userId: user.id,
-      },
-      status: 201
-    }
+    return { userId: user.id };
   }
 
   async refreshAccessToken(refreshToken: string): Promise<string> {
