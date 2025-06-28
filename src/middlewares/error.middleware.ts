@@ -15,7 +15,7 @@ export const errorHandler = (error: unknown, req: Request, res: Response, next: 
       message: err.message,
     }));
 
-    res.status(400).json({ message: 'Validation error', issues });
+    res.status(400).json({ message: 'Erro de validação.', issues });
     return;
   }
 
